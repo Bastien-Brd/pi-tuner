@@ -2,6 +2,8 @@ import sounddevice as sd
 import numpy as np
 import time
 
+from led_display import display_tuning_guidance
+
 
 def is_in_range(f, f_range):
     """
@@ -63,4 +65,4 @@ while True:
     f_detected = freqs[f_max_index]*fs
     print(f_detected)
     # Give relevant guidance to the user (tune up or down)
-    print(tuning_guidance(f_detected, precision))
+    display_tuning_guidance(tuning_guidance(f_detected, precision))
