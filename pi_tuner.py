@@ -53,5 +53,6 @@ while True:
     fourier = np.fft.fft(myrecording.ravel())
     f_max_index = np.argmax(abs(fourier[:fourier.size/2]))
     freqs = np.fft.fftfreq(len(fourier))
-    print(freqs[f_max_index]*fs)
-    print(tuning_guidance(f))
+    f_detected = freqs[f_max_index]*fs
+    print(f_detected)
+    print(tuning_guidance(f_detected))
