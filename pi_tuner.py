@@ -50,7 +50,7 @@ while True:
     print("---------")
     myrecording = sd.rec(duration * fs, samplerate=fs, channels=1, device=device)
     time.sleep(1.1*duration)
-    fourier = np.fft.fft(myrecording.ravel()
+    fourier = np.fft.fft(myrecording.ravel())
     f_max_index = np.argmax(abs(fourier[:fourier.size/2]))
     freqs = np.fft.fftfreq(len(fourier))
     print(freqs[f_max_index]*fs)
