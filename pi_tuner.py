@@ -65,4 +65,4 @@ while True:
     f_detected = freqs[f_max_index]*fs
     print(f_detected)
     # Give relevant guidance to the user (tune up or down)
-    display_tuning_guidance(tuning_guidance(f_detected, precision))
+    display_tuning_guidance(*tuning_guidance(f_detected, precision), duration=0.7)
