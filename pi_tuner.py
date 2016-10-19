@@ -46,7 +46,7 @@ def tuning_guidance(f, precision=0.02):
 
 # Define some settings
 device = 0    # we use my USB sound card device
-duration = 1  # seconds
+duration = 0.5  # seconds
 fs = 44100    # samples by second
 precision=0.02 # how close to the target pitch do we consider a match
 
@@ -65,4 +65,4 @@ while True:
     f_detected = freqs[f_max_index]*fs
     print(f_detected)
     # Give relevant guidance to the user (tune up or down)
-    display_tuning_guidance(*tuning_guidance(f_detected, precision), duration=0.7)
+    display_tuning_guidance(*tuning_guidance(f_detected, precision), duration=0.45)
