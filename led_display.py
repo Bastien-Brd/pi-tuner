@@ -29,16 +29,27 @@ PITCHES = {
 }
 
 DIRECTIONS = {
-    -1: ((a1, b1, f1, g1), (c1, d1, e1,)),
+    -1: ((a1, b1, g1, f1,), (c1, d1, e1,)),
     0: ((g1, ), (a1, b1, c1, d1, e1, f1, )),
     1: ((c1, d1, e1, g1), (a1, b1, f1)),
 }
 
-def display_tuning_guidance(pitch, direction):
-    leds_on = PITCHES[pitch][0] + DIRECTIONS[direction][0]
+def display_tuning_guidance(pitch, direction, duration=1):
+    leds_on = PITCHES[pitch][0]
     leds_off = PITCHES[pitch][1] + DIRECTIONS[direction][1]
+    animated_leds = DIRECTIONS[direction][0]
     # Turn the appropriate leds on or off
     for led in leds_on:
         led.off()
     for led in leds_off:
         led.on()
+    timer = duration
+    while timer > 0:
+        for led in animated_leds:
+            led.on()
+            map(lambda x: x.off(), [l for l in animated_leds if l != led])
+            sleep(duration/8.0)
+        timer -= duration/2.0
+            
+        
+
