@@ -42,17 +42,25 @@ def tuning_guidance(f, precision=0.02):
             else:
                 return pitch, -1
 
+# Define some settings
 device = 0    # we use my USB sound card device
 duration = 1  # seconds
 fs = 44100    # samples by second
+precision=0.02 # how close to the target pitch do we consider a match
 
 while True:
     print("---------")
+    # Listen to a bit of sound from the mic, recording it as a numpy array
     myrecording = sd.rec(duration * fs, samplerate=fs, channels=1, device=device)
     time.sleep(1.1*duration)
+    # Calculate the Fourier transform of the recorded signal
     fourier = np.fft.fft(myrecording.ravel())
+    # Extrat the fundamental frequency from it 
     f_max_index = np.argmax(abs(fourier[:fourier.size/2]))
+    # Get the scale of frequencies corresponding to the numpy Fourier transforms definition
     freqs = np.fft.fftfreq(len(fourier))
+    # And so the actual fundamental frequency detected is
     f_detected = freqs[f_max_index]*fs
     print(f_detected)
-    print(tuning_guidance(f_detected))
+    # Give relevant guidance to the user (tune up or down)
+    print(tuning_guidance(f_detected, precision))
